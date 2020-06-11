@@ -37,7 +37,7 @@ class InitiateFractionalStillCard extends Component {
       startVolume: this.state.startVolume
     });
     axios
-      .post("http://107.13.224.253:3001/setfractional", {
+      .post('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/setfractional', {
         fractionalStillInitiatingValues
       })
       .then(res => {
@@ -49,7 +49,7 @@ class InitiateFractionalStillCard extends Component {
 
   startSimplifiedRun() {
     console.log(this.state);
-    axios.get("http://107.13.224.253:3001/simplifiedprogram").then(res => {
+    axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/simplifiedprogram').then(res => {
       console.log(res.data.message);
       let message = res.data.message;
       this.setState({ message: message });

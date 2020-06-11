@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPotRunOverview } from '../actions/PotStillAction'
 import Typography from '@material-ui/core/Typography'
- 
+
 
 class GinRunInitiation extends Component {
     state = {
@@ -34,10 +34,10 @@ class GinRunInitiation extends Component {
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
-    
+
     constructor(props) {
         super(props);
-        
+
         this.onChange = this.onChange.bind(this);
         this.startPotRun = this.startPotRun.bind(this);
     }
@@ -55,7 +55,7 @@ class GinRunInitiation extends Component {
             lemon:this.state.lemon,
             typeOfRun:'Gin'
         });
-        axios.post('http://107.13.224.253:3001/setpot', {
+        axios.post('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/setpot', {
             potStillInitiatingValues
         })
             .then(res => {
@@ -70,7 +70,7 @@ class GinRunInitiation extends Component {
             forcedTerminationTime:8,
             typeOfRun:'Strip of Gin'
         });
-        axios.post('http://107.13.224.253:3001/setpot', {
+        axios.post('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/setpot', {
             potStillInitiatingValues
         })
             .then(res => {
@@ -83,16 +83,16 @@ class GinRunInitiation extends Component {
     render() {
         return (
             <div>
-                {this.props.serverPotOverview.requiresStrippingRun ? 
-                    <Paper> 
+                {this.props.serverPotOverview.requiresStrippingRun ?
+                    <Paper>
                         <Typography align="center" gutterBottom variant="headline" component="h2">
                                 The previous gin run finished by time.  Please initiate stripping run to recover remaining alcohol
-                        </Typography>   
+                        </Typography>
                         <br />
                         <Button variant="contained" color="primary" onClick={this.startStripOfGinRun}>
                             Start Stripping of Previous Gin Run
-                        </Button> 
-                    </Paper> 
+                        </Button>
+                    </Paper>
                     :
                     <Paper>
                         <TextField

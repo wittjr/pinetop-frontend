@@ -11,14 +11,14 @@ class FractionalStillButtons extends Component {
 
         this.retractArm = this.retractArm.bind(this);
         this.extendArm = this.extendArm.bind(this);
-        
+
         this.openValve = this.openValve.bind(this);
         this.closeValve = this.closeValve.bind(this);
         this.heatOff = this.heatOff.bind(this);
     }
 
     retractArm () {
-        axios.get('http://107.13.224.253:3001/retractarm')
+        axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/retractarm')
             .then(res => {
                 let message = res.data.message;
                 this.setState({message:message})
@@ -26,7 +26,7 @@ class FractionalStillButtons extends Component {
     }
 
     extendArm () {
-        axios.get('http://107.13.224.253:3001/extendarm')
+        axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/extendarm')
             .then(res => {
                 let message = res.data.message;
                 this.setState({message:message})
@@ -34,7 +34,7 @@ class FractionalStillButtons extends Component {
     }
 
     openValve () {
-        axios.get('http://107.13.224.253:3001/openvalve')
+        axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/openvalve')
             .then(res => {
                 let message = res.data.message;
                 this.setState({message:message})
@@ -42,7 +42,7 @@ class FractionalStillButtons extends Component {
     }
 
     closeValve () {
-        axios.get('http://107.13.224.253:3001/closevalve')
+        axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/closevalve')
             .then(res => {
                 let message = res.data.message;
                 this.setState({message:message})
@@ -50,7 +50,7 @@ class FractionalStillButtons extends Component {
     }
 
     heatOff () {
-        axios.get('http://107.13.224.253:3001/turnoffheat')
+        axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/turnoffheat')
             .then(res => {
                 let message = res.data.message;
                 this.setState({message:message})

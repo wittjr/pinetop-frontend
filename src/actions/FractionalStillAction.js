@@ -3,7 +3,7 @@ import axios from "axios"
 import store from '../store'
 
 export const getRunOverview = () => dispatch => {
-    let serverString = `http://107.13.224.253:3001/fractionalsummary`
+    let serverString = 'http://' + process.env.REACT_APP_PHIDGET_SERVER + '/fractionalsummary'
     axios.get(serverString)
         .then(res => {
             return res.data.serverRunOverview;
@@ -16,7 +16,7 @@ export const getRunOverview = () => dispatch => {
 }
 
 export const getGraphData = () => dispatch => {
-    let serverString = `http://107.13.224.253:3001/fractionalgraphdata`
+    let serverString = 'http://' + process.env.REACT_APP_PHIDGET_SERVER + '/fractionalgraphdata'
     let theState = store.getState();
     let lastGraphPointID =  theState.fractionalStill.fractionalGraphData.length > 1 ? theState.fractionalStill.fractionalGraphData[theState.fractionalStill.fractionalGraphData.length -1].id : 0;
     axios.get(serverString)

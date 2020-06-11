@@ -21,7 +21,7 @@ class PotStillButtons extends Component {
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
-    
+
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
@@ -36,7 +36,7 @@ class PotStillButtons extends Component {
         } else {
             potStillInitiatingValues = JSON.stringify({forcedTerminationTime:8, typeOfRun:'Large Stripping'});
         }
-        axios.post('http://107.13.224.253:3001/setpot', {
+        axios.post('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/setpot', {
             potStillInitiatingValues
         })
             .then(res => {

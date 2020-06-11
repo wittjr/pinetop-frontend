@@ -3,7 +3,7 @@ import axios from "axios"
 import store from '../store'
 
 export const getPotRunOverview = () => dispatch => {
-    let serverString = `http://107.13.224.253:3001/potsummary`
+    let serverString = 'http://' + process.env.REACT_APP_PHIDGET_SERVER + '/potsummary'
     axios.get(serverString)
         .then(res => {
             return res.data.serverPotOverview;
@@ -16,7 +16,7 @@ export const getPotRunOverview = () => dispatch => {
 }
 
 export const getPotGraphData = () => dispatch => {
-    let serverString = `http://107.13.224.253:3001/potgraphdata`
+    let serverString = 'http://' + process.env.REACT_APP_PHIDGET_SERVER + '/potgraphdata'
     let theState = store.getState();
     let lastGraphPointID =  theState.potStill.graphData.length > 1 ? theState.potStill.graphData[theState.potStill.graphData.length -1].id : 0;
     axios.get(serverString)
@@ -30,5 +30,3 @@ export const getPotGraphData = () => dispatch => {
             })
         )
 }
-
-

@@ -10,7 +10,7 @@ import { LinearProgress } from '../../node_modules/@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
 class FractionalStill extends Component {
-    
+
     componentDidMount() {
         this.props.getGraphData();
         this.props.getRunOverview();
@@ -26,15 +26,15 @@ class FractionalStill extends Component {
     updateGraph() {
         this.props.getGraphData();
     }
-    
+
 
     render() {
         let lastTimePoint="now"
         return (
             <div>
-                
-                {this.props.serverRunOverview.running ? <UnitOpTabCard 
-                    headline="Fractional Still" 
+
+                {this.props.serverRunOverview.running ? <UnitOpTabCard
+                    headline="Fractional Still"
                     graphData={this.props.graphData}
                     lastTimePoint={lastTimePoint}
                     lastTemperature={this.props.serverRunOverview.currentTemperature}
@@ -45,13 +45,13 @@ class FractionalStill extends Component {
                                 {this.props.serverRunOverview.running ? this.props.serverRunOverview.message : `Fractional Still is ready for the next batch`}
                     </Typography>
                     <br />
-                    {this.props.serverRunOverview.running ? 
+                    {this.props.serverRunOverview.running ?
                     <div>
                         <Typography gutterBottom variant="body1" component="p">
                                 Progress in Beaker Number {this.props.serverRunOverview.currentBeaker}. Click {this.props.serverRunOverview.currentClickCountInBeaker} of {this.props.serverRunOverview.totalClickCountInBeaker}
                         </Typography>
-                        {/* // eslint-disable-next-line */} 
-                        <LinearProgress variant="determinate" value={this.props.serverRunOverview.totalClickCountInBeaker == 0 ? 0 : (this.props.serverRunOverview.currentClickCountInBeaker / this.props.serverRunOverview.totalClickCountInBeaker*100)} />
+                        {/* // eslint-disable-next-line */}
+                        <LinearProgress variant="determinate" value={this.props.serverRunOverview.totalClickCountInBeaker === 0 ? 0 : (this.props.serverRunOverview.currentClickCountInBeaker / this.props.serverRunOverview.totalClickCountInBeaker*100)} />
                         <Typography gutterBottom variant="body1" component="p">
                             Overall Run Progress: Beaker {this.props.serverRunOverview.currentBeaker} out of 20
                         </Typography>
@@ -63,8 +63,8 @@ class FractionalStill extends Component {
                 {this.props.serverRunOverview.running ? '' : <FractionalStillButtons />}
                 <br />
                 {this.props.serverRunOverview.running ? '' : <InitiateFractionalStillCard />}
-                
-                
+
+
             </div>
         )
   }
