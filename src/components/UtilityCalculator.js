@@ -11,7 +11,7 @@ class UtilityCalculator extends Component {
 
         this.onChange = this.onChange.bind(this);
     }
-    
+
     onChange(e) {
         // eslint-disable-next-line
         let newVolumeHearts = 120 / (parseInt(this.state.startingAlcoholPercent));
@@ -26,12 +26,12 @@ class UtilityCalculator extends Component {
                     <Typography variant="headline" component="h1">
                         Dilution for starting gin run
                     </Typography>
-                    <Typography component="p">
-                            Hearts Alcohol Percentage:
-                            <TextField name='startingAlcoholPercent' value={this.state.startingAlcoholPercent} onChange={this.onChange}/>
+                    <Typography component="div">
+                      Hearts Alcohol Percentage:
+                      <TextField name='startingAlcoholPercent' value={this.state.startingAlcoholPercent} onChange={this.onChange}/>
                     </Typography>
                     <form >
-                        {this.state.startingAlcoholPercent >0 ? 
+                        {this.state.startingAlcoholPercent >0 ?
                         <div>
                             <label> Add {(this.state.volumeOfHeartsToAdd /1 ).toFixed(1)} liters of hearts ({(this.state.volumeOfHeartsToAdd / 3.74).toFixed(2)} gallons) </label><br />
                             <label> QS with water to 10 gallons </label><br />

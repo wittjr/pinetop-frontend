@@ -29,7 +29,6 @@ class PotStillButtons extends Component {
     }
 
     startPotRun() {
-        console.log(this.state);
         let potStillInitiatingValues = {};
         if (this.state.selectedBigPot) {
             potStillInitiatingValues = JSON.stringify({forcedTerminationTime:40, typeOfRun:'Large Stripping'});
@@ -40,7 +39,6 @@ class PotStillButtons extends Component {
             potStillInitiatingValues
         })
             .then(res => {
-                console.log(res.data);
                 let message = res.data.message;
                 this.setState({message:message})
             })

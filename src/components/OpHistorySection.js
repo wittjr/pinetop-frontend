@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import GraphArea from './GraphArea';
+import RunHistory from './RunHistory';
 
 const styles = theme => ({
   root: {
@@ -16,19 +16,13 @@ const styles = theme => ({
 function PaperSheet(props) {
   const { classes } = props;
 
-  let toBeGraphed=[];
-  toBeGraphed.push(props.graphData);
-
   return (
     <div>
       <Paper className={classes.root} elevation={1}>
         <Typography variant="headline" component="h3">
           {props.headline}
         </Typography>
-        <Typography component="p">
-          The column temperature is currently {props.lastTemperature} Celsius
-        </Typography>
-        <GraphArea graphData={toBeGraphed} />
+        <RunHistory/ >
       </Paper>
     </div>
   );

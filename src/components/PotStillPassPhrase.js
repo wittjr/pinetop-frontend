@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import PotStillButtons from "./PotStillButtons";
+const crypto = require('../utils/crypto');
 
 class PotStillPassPhrase extends Component {
   state = {
-    enteredPassPhrase: ""
+    enteredPassPhrase: "",
+    currentPassPhrase: process.env.REACT_APP_PASSWORD
   };
 
   handleChange = name => event => {
-    console.log(event.target.value);
-    console.log(name);
     this.setState({
       [name]: event.target.value
     });
@@ -36,10 +36,11 @@ class PotStillPassPhrase extends Component {
             defaultValue=""
             helperText="Please enter the passphrase"
             margin="normal"
+            type="password"
             onChange={this.onChange}
           />
           <br />
-          {this.state.enteredPassPhrase === "Bacon911" ? (
+          {crypto.checkPassword(this.state.enteredPassPhrase, this.state.currentPassPhrase) ? (
             <PotStillButtons />
           ) : (
             <div />

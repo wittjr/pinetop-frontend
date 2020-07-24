@@ -2,12 +2,12 @@ import React from "react";
 import {AreaChart} from 'react-easy-chart';
 
 const GraphArea = props => {
-    
-    
+
+
     return (
     <div>
         <AreaChart
-            // xType={'time'}
+            xType={'text'}
             axes
             grid
             verticalGrid

@@ -25,8 +25,6 @@ class GinRunInitiation extends Component {
     };
 
     handleChange = name => event => {
-        console.log(event.target.value)
-        console.log(name)
         this.setState({
             [name]: event.target.value,
         });
@@ -59,7 +57,6 @@ class GinRunInitiation extends Component {
             potStillInitiatingValues
         })
             .then(res => {
-                console.log(res.data);
                 let message = res.data.message;
                 this.setState({message:message})
             })
@@ -74,7 +71,6 @@ class GinRunInitiation extends Component {
             potStillInitiatingValues
         })
             .then(res => {
-                console.log(res.data);
                 let message = res.data.message;
                 this.setState({message:message})
             })
@@ -83,17 +79,18 @@ class GinRunInitiation extends Component {
     render() {
         return (
             <div>
-                {this.props.serverPotOverview.requiresStrippingRun ?
+                {this.props.serverPotOverview.requiresStrippingRun &&
                     <Paper>
                         <Typography align="center" gutterBottom variant="headline" component="h2">
-                                The previous gin run finished by time.  Please initiate stripping run to recover remaining alcohol
+                                The previous gin run finished by time.  You should initiate a stripping run to recover any remaining alcohol.
                         </Typography>
                         <br />
                         <Button variant="contained" color="primary" onClick={this.startStripOfGinRun}>
                             Start Stripping of Previous Gin Run
                         </Button>
+                        <br />
                     </Paper>
-                    :
+                }
                     <Paper>
                         <TextField
                             id="forcedTerminationTime"
@@ -182,7 +179,6 @@ class GinRunInitiation extends Component {
                             Start Gin Run
                         </Button>
                     </Paper>
-                }
             </div>
         )
   }

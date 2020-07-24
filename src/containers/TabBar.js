@@ -6,15 +6,17 @@ import PotStillCard from './PotStillCard';
 import UtilityCalculator from '../components/UtilityCalculator';
 import Dashboard from '../containers/Dashboard';
 import FractionalStill from '../components/FractionalStill';
+import HistoryTab from '../components/HistoryTab';
+import AdminTab from '../components/AdminTab';
 
 const TabBar = ( props ) => {
     // let selectedTab;
-    
+
     const setActiveTab = (tabIndex, selectedTab) => {
         let indexValue = parseInt(tabIndex.value, 10);  // includes radix parameter to make react quit complaining
         selectedTab = props.allowedTabs[indexValue];
         props.setActiveCard(selectedTab);
-    } 
+    }
 
     return (
         <div>
@@ -24,6 +26,8 @@ const TabBar = ( props ) => {
             {props.activeCard === 'Utility Calculators' ? <UtilityCalculator /> : ""}
             {props.activeCard === 'Dashboard' ? <Dashboard /> : ""}
             {props.activeCard === 'Fractional Still' ? <FractionalStill /> : ""}
+            {props.activeCard === 'History' ? <HistoryTab /> : ""}
+            {props.activeCard === 'Admin' ? <AdminTab /> : ""}
             {/* {props.activeCard === 'Purchase History' ? <PurchaseHistory /> : ""} */}
         </div>
     )

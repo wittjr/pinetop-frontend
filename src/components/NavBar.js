@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   flex: {
     flexGrow: 1,
@@ -17,6 +17,9 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  header: {
+    backgroundColor: '#3c6b3c'
+  }
 };
 
 function ButtonAppBar(props) {
@@ -24,7 +27,7 @@ function ButtonAppBar(props) {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={classes.header}>
           {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton> */}

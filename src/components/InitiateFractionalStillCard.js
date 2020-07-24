@@ -3,21 +3,30 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
+const crypto = require('../utils/crypto');
 
 class InitiateFractionalStillCard extends Component {
   state = {
     startAlcohol: 0.3,
     startVolume: 38.8,
-    enteredPassPhrase: ""
+    collectionCoefficient: 1.75,
+    lastFractionForHeads: 5,
+    lastFractionForHearts: 16,
+    preHeatEndTemperature: 45,
+    methanolPercent: 0.03,
+    volumeHeadsPercent: 0.05,
+    volumeTailsPercent: 0.05,
+    preHeatTime: 3,
+    enteredPassPhrase: "",
+    currentPassPhrase: process.env.REACT_APP_PASSWORD
   };
 
   handleChange = name => event => {
-    console.log(event.target.value);
-    console.log(name);
     this.setState({
       [name]: event.target.value
     });
   };
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -31,26 +40,30 @@ class InitiateFractionalStillCard extends Component {
   }
 
   startFractionalRun() {
-    console.log(this.state);
     let fractionalStillInitiatingValues = JSON.stringify({
       startAlcohol: this.state.startAlcohol,
-      startVolume: this.state.startVolume
+      startVolume: this.state.startVolume,
+      collectionCoefficient: this.state.collectionCoefficient,
+      lastFractionForHeads: this.state.lastFractionForHeads,
+      lastFractionForHearts: this.state.lastFractionForHearts,
+      preHeatEndTemperature: this.state.preHeatEndTemperature,
+      methanolPercent: this.state.methanolPercent,
+      volumeHeadsPercent: this.state.volumeHeadsPercent,
+      volumeTailsPercent: this.state.volumeTailsPercent,
+      preHeatTime: this.state.preHeatTime
     });
     axios
       .post('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/setfractional', {
         fractionalStillInitiatingValues
       })
       .then(res => {
-        console.log(res.data);
         let message = res.data.message;
         this.setState({ message: message });
       });
   }
 
   startSimplifiedRun() {
-    console.log(this.state);
     axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/simplifiedprogram').then(res => {
-      console.log(res.data.message);
       let message = res.data.message;
       this.setState({ message: message });
     });
@@ -61,24 +74,96 @@ class InitiateFractionalStillCard extends Component {
       <div>
         <Paper>
           <TextField
+            id="startVolume"
+            name="startVolume"
+            label="Starting Volume in Liters"
+            value={this.state.startVolume}
+            helperText="Please input as a decimal"
+            margin="normal"
+            onChange={this.onChange}
+          />
+          <TextField
             id="startAlcohol"
             label="Starting Alcohol Percent"
-            defaultValue="0.3"
+            value={this.state.startAlcohol}
             helperText="Please input as a decimal"
             margin="normal"
             name="startAlcohol"
             onChange={this.onChange}
           />
           <TextField
-            id="startVolume"
-            name="startVolume"
-            label="Starting Volume in Liters"
-            defaultValue="38.8"
+            id="methanolPercent"
+            label="Methanol Percent"
+            value={this.state.methanolPercent}
             helperText="Please input as a decimal"
             margin="normal"
+            name="methanolPercent"
+            onChange={this.onChange}
+          />
+          <TextField
+            id="volumeHeadsPercent"
+            label="Heads Percent"
+            value={this.state.volumeHeadsPercent}
+            helperText="Please input as a decimal"
+            margin="normal"
+            name="volumeHeadsPercent"
+            onChange={this.onChange}
+          />
+          <TextField
+            id="volumeTailsPercent"
+            label="Tails Percent"
+            value={this.state.volumeTailsPercent}
+            helperText="Please input as a decimal"
+            margin="normal"
+            name="volumeTailsPercent"
             onChange={this.onChange}
           />
           <br />
+          <TextField
+            id="collectionCoefficient"
+            label="Collection coefficient"
+            value={this.state.collectionCoefficient}
+            helperText="Please input as a decimal"
+            margin="normal"
+            name="collectionCoefficient"
+            onChange={this.onChange}
+          />
+          <TextField
+            id="lastFractionForHeads"
+            label="End of heads"
+            value={this.state.lastFractionForHeads}
+            helperText="Please input as a decimal"
+            margin="normal"
+            name="lastFractionForHeads"
+            onChange={this.onChange}
+          />
+          <TextField
+            id="lastFractionForHearts"
+            label="End of hearts"
+            value={this.state.lastFractionForHearts}
+            helperText="Please input as a decimal"
+            margin="normal"
+            name="lastFractionForHearts"
+            onChange={this.onChange}
+          />
+          <TextField
+            id="preHeatEndTemperature"
+            label="Preheat temperature"
+            value={this.state.preHeatEndTemperature}
+            helperText="Please input as a decimal"
+            margin="normal"
+            name="preHeatEndTemperature"
+            onChange={this.onChange}
+          />
+          <TextField
+            id="preHeatTime"
+            label="Preheat time limit"
+            value={this.state.preHeatTime}
+            helperText="Enter in hours"
+            margin="normal"
+            name="preHeatTime"
+            onChange={this.onChange}
+          />          <br />
           <TextField
             id="enteredPassPhrase"
             name="enteredPassPhrase"
@@ -86,10 +171,11 @@ class InitiateFractionalStillCard extends Component {
             defaultValue=""
             helperText="Please enter the passcode to start the fractional still"
             margin="normal"
+            type="password"
             onChange={this.onChange}
           />
           <br />
-          {this.state.enteredPassPhrase === "Bacon911" ? (
+          {crypto.checkPassword(this.state.enteredPassPhrase, this.state.currentPassPhrase) ? (
             <Button
               variant="contained"
               color="primary"

@@ -69,7 +69,7 @@ class FractionalStillButtons extends Component {
         return (
             <div>
                 <Paper>
-                    <Grid container spacing={"40"} justify="center">
+                    <Grid container spacing={40} justify="center">
                         <Button variant="contained" color="primary" onClick={this.retractArm}>
                             Retract Arm
                         </Button>
