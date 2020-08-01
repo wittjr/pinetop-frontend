@@ -42,21 +42,37 @@ class RunSummary extends Component {
   }
 
   saveResult() {
-    let data = {
-      result: {
+    const data = {};
+    if (this.props.runData.operation === 'pot') {
+      data.result = {
         ...this.props.runData.result,
         volume: parseFloat(this.state.volume),
         percent: parseFloat(this.state.percent),
         notes: this.state.notes
-      }
-    };
+      };
+    } else {
+      data.result = {
+        ...this.props.runData.result,
+        headsVolume: parseFloat(this.state.headsVolume),
+        headsPercent: parseFloat(this.state.headsPercent),
+        heartsVolume: parseFloat(this.state.heartsVolume),
+        heartsPercent: parseFloat(this.state.heartsPercent),
+        tailsVolume: parseFloat(this.state.tailsVolume),
+        tailsPercent: parseFloat(this.state.tailsPercent),
+        notes: this.state.notes
+      };
+    }
 
     axios.post('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/rundata/' + this.props.batchID,
       data
     )
         .then(res => {
-            let message = res.data.message;
-            this.setState({message:message})
+            //let message = res.data.message;
+            //this.setState({message:message})
+            this.props.runData.result = {
+              ...data.result
+            }
+            this.setState({});
         })
   };
 
@@ -77,6 +93,8 @@ class RunSummary extends Component {
             :
               <FractionalRunSummary
                 runData={runData}
+                change={this.onChange}
+                click={this.saveResult}
               />
             }
           </Paper>

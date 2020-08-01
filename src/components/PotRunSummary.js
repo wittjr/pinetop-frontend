@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-
 const potRunSummary = (props) => {
   const headlineStyle = {
     width: '100%',
@@ -12,7 +11,8 @@ const potRunSummary = (props) => {
 
   const cellStyle = {
     textAlign: 'center',
-    padding: '10px'
+    marginLeft: '10px',
+    marginRight: '10px'
   };
 
   const gridStyle = {
@@ -23,7 +23,7 @@ const potRunSummary = (props) => {
 
   const fullWidthCell = {
     width: '100%',
-    padding: '25px'
+    margin: '25px'
   }
 
   const hasResult = props.runData.result && props.runData.result.volume && props.runData.result.percent;
@@ -60,6 +60,7 @@ const potRunSummary = (props) => {
               label="Alcohol volume"
               defaultValue=""
               margin="normal"
+              style={cellStyle}
               onChange={props.change}
           />
           <TextField
@@ -68,6 +69,7 @@ const potRunSummary = (props) => {
               label="Alcohol percentage"
               defaultValue=""
               margin="normal"
+              style={cellStyle}
               onChange={props.change}
           />
           <TextField
