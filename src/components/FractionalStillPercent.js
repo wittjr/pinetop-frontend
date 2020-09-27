@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getRunOverview, getGraphData} from '../actions/FractionalStillActions';
+import { getRunOverview, getGraphData} from '../actions/FractionalStillAction';
 import UnitOpTabCard from '../components/UnitOpTabCard';
 import FractionalStillButtons from './FractionalStillButtons';
-import InitiateFractionalStillRunCard from './InitiateFractionalStillRunCard';
+import InitiateFractionalStillCard from './InitiateFractionalStillCard';
 import Paper from '@material-ui/core/Paper'
 import { LinearProgress } from '../../node_modules/@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
-class FractionalStill extends Component {
+class FractionalStillPercent extends Component {
 
     componentDidMount() {
         this.props.getGraphData();
@@ -45,7 +45,7 @@ class FractionalStill extends Component {
                                 {this.props.serverRunOverview.running ? this.props.serverRunOverview.message : `Fractional Still is ready for the next batch`}
                     </Typography>
                     <br />
-                    {this.props.serverRunOverview.running && this.props.serverRunOverview.type !== 'temp' ?
+                    {this.props.serverRunOverview.running ?
                     <div>
                         <Typography gutterBottom variant="body1" component="p">
                                 Progress in Beaker Number {this.props.serverRunOverview.currentBeaker}. Click {this.props.serverRunOverview.currentClickCountInBeaker} of {this.props.serverRunOverview.totalClickCountInBeaker}
@@ -62,7 +62,7 @@ class FractionalStill extends Component {
                 <br />
                 {this.props.serverRunOverview.running ? '' : <FractionalStillButtons />}
                 <br />
-                {this.props.serverRunOverview.running ? '' : <InitiateFractionalStillRunCard />}
+                {this.props.serverRunOverview.running ? '' : <InitiateFractionalStillCard />}
 
 
             </div>
@@ -70,7 +70,7 @@ class FractionalStill extends Component {
   }
 }
 
-FractionalStill.propTypes = {
+FractionalStillPercent.propTypes = {
     getRunOverview: PropTypes.func.isRequired,
     getGraphData: PropTypes.func.isRequired
 }
@@ -81,4 +81,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, { getRunOverview, getGraphData })(FractionalStill);
+export default connect(mapStateToProps, { getRunOverview, getGraphData })(FractionalStillPercent);

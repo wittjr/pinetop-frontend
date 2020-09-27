@@ -6,6 +6,7 @@ import PotStillCard from './PotStillCard';
 import UtilityCalculator from '../components/UtilityCalculator';
 import Dashboard from '../containers/Dashboard';
 import FractionalStill from '../components/FractionalStill';
+import FractionalStillPercent from '../components/FractionalStillPercent';
 import HistoryTab from '../components/HistoryTab';
 import AdminTab from '../components/AdminTab';
 
@@ -25,7 +26,8 @@ const TabBar = ( props ) => {
             {props.activeCard === 'Pot Still' ? <PotStillCard /> : ""}
             {props.activeCard === 'Utility Calculators' ? <UtilityCalculator /> : ""}
             {props.activeCard === 'Dashboard' ? <Dashboard /> : ""}
-            {props.activeCard === 'Fractional Still' ? <FractionalStill /> : ""}
+            {props.activeCard === 'Fractional Still (percent)' ? <FractionalStillPercent /> : ""}
+            {props.activeCard === 'Fractional Still (temp)' ? <FractionalStill /> : ""}
             {props.activeCard === 'History' ? <HistoryTab /> : ""}
             {props.activeCard === 'Admin' ? <AdminTab /> : ""}
             {/* {props.activeCard === 'Purchase History' ? <PurchaseHistory /> : ""} */}

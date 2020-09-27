@@ -1,4 +1,4 @@
-import { GET_FRACTIONAL_GRAPH_DATA, GET_RUN_OVERVIEW } from '../actions/types'
+import { GET_FRACTIONAL_GRAPH_DATA, GET_RUN_OVERVIEW, GET_FRACTIONAL_STILL_GRAPH_DATA, GET_FRACTIONAL_STILL_RUN_OVERVIEW } from '../actions/types'
 
 const initialState = {
     fractionalGraphData: [],
@@ -13,6 +13,16 @@ export default function(state = initialState, action) {
                 fractionalGraphData:[...state.fractionalGraphData, ...action.payload]
             }
         case GET_RUN_OVERVIEW:
+            return {
+                ...state,
+                serverRunOverview:action.payload
+            }
+        case GET_FRACTIONAL_STILL_GRAPH_DATA:
+            return {
+                ...state,
+                fractionalGraphData:[...state.fractionalGraphData, ...action.payload]
+            }
+        case GET_FRACTIONAL_STILL_RUN_OVERVIEW:
             return {
                 ...state,
                 serverRunOverview:action.payload

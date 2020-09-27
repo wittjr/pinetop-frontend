@@ -6,10 +6,11 @@ const initialState = {
                     // 'Explanation',
                     'Dashboard',
                     'Pot Still',
-                    'Fractional Still',
+                    'Fractional Still (percent)',
+                    'Fractional Still (temp)',
                     'Utility Calculators',
                     'History',
-                    'Admin'       
+                    'Admin'
     ],
     isMobileDevice:false,
     activeCard:'Dashboard',

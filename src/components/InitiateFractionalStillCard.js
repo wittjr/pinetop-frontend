@@ -36,7 +36,7 @@ class InitiateFractionalStillCard extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.startFractionalRun = this.startFractionalRun.bind(this);
-    this.startSimplifiedRun = this.startSimplifiedRun.bind(this);
+    // this.startSimplifiedRun = this.startSimplifiedRun.bind(this);
   }
 
   startFractionalRun() {
@@ -62,12 +62,12 @@ class InitiateFractionalStillCard extends Component {
       });
   }
 
-  startSimplifiedRun() {
-    axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/simplifiedprogram').then(res => {
-      let message = res.data.message;
-      this.setState({ message: message });
-    });
-  }
+  // startSimplifiedRun() {
+  //   axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/simplifiedprogram').then(res => {
+  //     let message = res.data.message;
+  //     this.setState({ message: message });
+  //   });
+  // }
 
   render() {
     return (
