@@ -25,8 +25,10 @@ class HistoryGraphArea extends Component {
     let graphData = [];
     if (this.props.graphData && this.props.graphData[0]) {
       this.props.graphData[0].forEach((row) => {
+        // let time_array = row.x.split(" ")[0].split(":");
+        let x_value = row.x;
         graphData.push({
-          x: row.x.split(" ")[0].split(":",2).join(":"),
+          x: x_value,
           y: row.y
         })
       });
@@ -35,11 +37,18 @@ class HistoryGraphArea extends Component {
     return (
       <div>
           <AreaChart
-              xType={'text'}
+              xType={'time'}
               axes
               grid
               axisLabels={{x: 'Hour', y: 'Percentage'}}
               verticalGrid
+              xTicks={20}
+              tickTimeDisplayFormat = {
+                 '%I:%M %p'
+              }
+              datePattern = {
+                '%-m/%-d/%Y, %I:%M:%S %p'
+              }
               lineColors={['blue']}
               areaColors={['blue']}
               interpolate={'cardinal'}

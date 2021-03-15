@@ -59,7 +59,7 @@ export default class RunHistory extends Component {
           let newDataPoints = [];
           res.data.data.forEach((datapoint) => {
             newDataPoints.push({
-              x: (new Date(datapoint.timestamp)).toLocaleTimeString(),
+              x: (new Date(datapoint.timestamp)).toLocaleString(),
               y: datapoint.temperature
             });
           });
