@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getRunOverview, getGraphData} from '../actions/FractionalStillActions';
 import UnitOpTabCard from '../components/UnitOpTabCard';
-import FractionalStillButtons from './FractionalStillButtons';
+import FractionalStillButtonsNew from './FractionalStillButtonsNew';
 import InitiateFractionalStillRunCard from './InitiateFractionalStillRunCard';
 import Paper from '@material-ui/core/Paper'
 import { LinearProgress } from '../../node_modules/@material-ui/core';
@@ -32,7 +32,8 @@ class FractionalStill extends Component {
         let lastTimePoint="now"
         return (
             <div>
-
+                <br/>
+                <FractionalStillButtonsNew/>
                 {this.props.serverRunOverview.running ? <UnitOpTabCard
                     headline="Fractional Still"
                     graphData={this.props.graphData}
@@ -60,11 +61,7 @@ class FractionalStill extends Component {
                     </div> : '' }
                 </Paper>
                 <br />
-                {this.props.serverRunOverview.running ? '' : <FractionalStillButtons />}
-                <br />
                 {this.props.serverRunOverview.running ? '' : <InitiateFractionalStillRunCard />}
-
-
             </div>
         )
   }
