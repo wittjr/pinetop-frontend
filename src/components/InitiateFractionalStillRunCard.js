@@ -8,12 +8,12 @@ const crypto = require('../utils/crypto');
 class InitiateFractionalStillRunCard extends Component {
   state = {
     headsTemp: 75,
-    headsTime: 60,
+    headsTime: 90,
     heartsTemp: 92,
-    heartsTime: 120,
+    heartsTime: 240,
     tailsTemp: 99,
     tailsTime: 0,
-    preHeatEndTemperature: 55,
+    preHeatEndTemperature: 70,
     preHeatTime: 3,
     enteredPassPhrase: "",
     currentPassPhrase: process.env.REACT_APP_PASSWORD
