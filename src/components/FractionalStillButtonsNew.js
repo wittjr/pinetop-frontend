@@ -8,8 +8,8 @@ class FractionalStillButtons extends Component {
   constructor(props) {
     axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/fractionalstill/heat')
       .then(res => {
-        let message = res.data.heatStatus;
-        if (message) {
+        let state = res.data.state;
+        if (state) {
           this.setState({
             heatStatus: 'on'
           })
@@ -21,8 +21,8 @@ class FractionalStillButtons extends Component {
       })
     axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/fractionalstill/solenoid')
       .then(res => {
-        let message = res.data.message;
-        if (message) {
+        let state = res.data.state;
+        if (state) {
           this.setState({
             solenoidStatus: 'open'
           })
@@ -101,8 +101,8 @@ class FractionalStillButtons extends Component {
       "state": "open"
     })
       .then(res => {
-        let message = res.data.message;
-        if (message) {
+        let state = res.data.state;
+        if (state) {
           this.setState({
             solenoidStatus: 'open'
           })
@@ -119,8 +119,8 @@ class FractionalStillButtons extends Component {
     "state": "close"
     })
       .then(res => {
-        let message = res.data.message;
-        if (message) {
+        let state = res.data.state;
+        if (state) {
           this.setState({
             solenoidStatus: 'open'
           })
@@ -137,8 +137,8 @@ class FractionalStillButtons extends Component {
       "state": "on"
     })
       .then(res => {
-        let message = res.data.message;
-        if (message) {
+        let state = res.data.state;
+        if (state) {
           this.setState({
             heatStatus: 'on'
           })
@@ -155,8 +155,8 @@ class FractionalStillButtons extends Component {
       "state": "off"
     })
       .then(res => {
-        let message = res.data.message;
-        if (message) {
+        let state = res.data.state;
+        if (state) {
           this.setState({
             heatStatus: 'on'
           })
