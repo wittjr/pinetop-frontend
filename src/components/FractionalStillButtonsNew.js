@@ -8,7 +8,7 @@ class FractionalStillButtons extends Component {
   constructor(props) {
     axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/fractionalstill/heat')
       .then(res => {
-        let message = res.data.message;
+        let message = res.data.heatStatus;
         if (message) {
           this.setState({
             heatStatus: 'on'
@@ -175,7 +175,7 @@ class FractionalStillButtons extends Component {
 
     axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/fractionalstill/heat')
       .then(res => {
-        let message = res.data.message;
+        let message = res.data.temperature;
         this.setState({
           message: 'Current temp:' + message
         })
