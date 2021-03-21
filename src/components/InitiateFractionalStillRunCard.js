@@ -15,6 +15,8 @@ class InitiateFractionalStillRunCard extends Component {
     tailsTime: 0,
     preHeatEndTemperature: 70,
     preHeatTime: 3,
+    runTimeLimit: 15,
+    stillDrainTime: 15,
     enteredPassPhrase: "",
     currentPassPhrase: process.env.REACT_APP_PASSWORD
   };
@@ -46,7 +48,9 @@ class InitiateFractionalStillRunCard extends Component {
       tailsTemp: this.state.tailsTemp,
       tailsTime: this.state.tailsTime,
       preHeatEndTemperature: this.state.preHeatEndTemperature,
-      preHeatTime: this.state.preHeatTime
+      preHeatTime: this.state.preHeatTime,
+      runTimeLimit: this.state.runTimeLimit,
+      stillDrainTime: this.state.stillDrainTime
     });
     axios
       .post('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/startFractionalRun', {
@@ -130,6 +134,24 @@ class InitiateFractionalStillRunCard extends Component {
             helperText="Please input in minutes"
             margin="normal"
             name="tailsTemp"
+            onChange={this.onChange}
+          />
+          <TextField
+            id="runTimeLimit"
+            label="Run time limit"
+            value={this.state.runTimeLimit}
+            helperText="Please input in hours, the time limit for run after successful preheat"
+            margin="normal"
+            name="runTimeLimit"
+            onChange={this.onChange}
+          />
+          <TextField
+            id="stillDrainTime"
+            label="Still drain time"
+            value={this.state.stillDrainTime}
+            helperText="Please input in minute, the amount of time to let the still drain after a run"
+            margin="normal"
+            name="stillDrainTime"
             onChange={this.onChange}
           />
 

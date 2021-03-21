@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getRunOverview, getGraphData} from '../actions/FractionalStillActions';
 import UnitOpTabCard from '../components/UnitOpTabCard';
 import FractionalStillButtonsNew from './FractionalStillButtonsNew';
+import FractionalStillRunControls from './FractionalStillRunControls';
 import InitiateFractionalStillRunCard from './InitiateFractionalStillRunCard';
 import Paper from '@material-ui/core/Paper'
 import { LinearProgress } from '../../node_modules/@material-ui/core';
@@ -34,6 +35,7 @@ class FractionalStill extends Component {
             <div>
                 <br/>
                 <FractionalStillButtonsNew/>
+                {this.props.serverRunOverview.running ? <FractionalStillRunControls /> : ''}
                 {this.props.serverRunOverview.running ? <UnitOpTabCard
                     headline="Fractional Still"
                     graphData={this.props.graphData}

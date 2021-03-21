@@ -179,6 +179,48 @@ class FractionalStillButtons extends Component {
         this.setState({
           message: 'Current temp:' + message
         })
+        let state = res.data.state;
+        if (state) {
+          this.setState({
+            heatStatus: 'on'
+          })
+        } else {
+          this.setState({
+            heatStatus: 'off'
+          })
+        }
+      })
+  }
+
+  stopRun() {
+    this.setState({
+      message: 'Requested to gracefully stop the run, will skip to the drain process'
+    })
+
+    axios.post('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/fractionalstill/endrun', {
+      "type": "graceful"
+    })
+      .then(res => {
+        let message = res.data.message;
+        this.setState({
+          message: message
+        })
+      })
+  }
+
+  terminateRun() {
+    this.setState({
+      message: 'Requested to end immediately terminate run, will turn off the heat and end the run'
+    })
+
+    axios.post('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/fractionalstill/endrun', {
+      "type": "immediate"
+    })
+      .then(res => {
+        let message = res.data.message;
+        this.setState({
+          message: message
+        })
       })
   }
 
