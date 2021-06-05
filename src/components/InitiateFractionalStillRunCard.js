@@ -3,6 +3,8 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 const crypto = require('../utils/crypto');
 
 class InitiateFractionalStillRunCard extends Component {
@@ -17,6 +19,7 @@ class InitiateFractionalStillRunCard extends Component {
     preHeatTime: 3,
     runTimeLimit: 15,
     stillDrainTime: 15,
+    cycleSolenoidWhileHeating: true,
     enteredPassPhrase: "",
     currentPassPhrase: process.env.REACT_APP_PASSWORD
   };
@@ -28,13 +31,23 @@ class InitiateFractionalStillRunCard extends Component {
   };
 
   onChange(e) {
+    this.setState({ [e.target.name]: parseFloat(e.target.value) });
+  }
+
+  onStringChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onCheckboxChange(e) {
+    this.setState({ [e.target.name]: e.target.checked });
   }
 
   constructor(props) {
     super(props);
 
     this.onChange = this.onChange.bind(this);
+    this.onStringChange = this.onStringChange.bind(this);
+    this.onCheckboxChange = this.onCheckboxChange.bind(this);
     this.startFractionalRun = this.startFractionalRun.bind(this);
     // this.startSimplifiedRun = this.startSimplifiedRun.bind(this);
   }
@@ -50,7 +63,8 @@ class InitiateFractionalStillRunCard extends Component {
       preHeatEndTemperature: this.state.preHeatEndTemperature,
       preHeatTime: this.state.preHeatTime,
       runTimeLimit: this.state.runTimeLimit,
-      stillDrainTime: this.state.stillDrainTime
+      stillDrainTime: this.state.stillDrainTime,
+      cycleSolenoidWhileHeating: this.state.cycleSolenoidWhileHeating
     });
     axios
       .post('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/startFractionalRun', {
@@ -154,7 +168,18 @@ class InitiateFractionalStillRunCard extends Component {
             name="stillDrainTime"
             onChange={this.onChange}
           />
-
+          <FormControlLabel
+            control={
+              <Checkbox
+                id="cycleSolenoidWhileHeating"
+                checked={this.state.cycleSolenoidWhileHeating}
+                margin="normal"
+                name="cycleSolenoidWhileHeating"
+                onChange={this.onCheckboxChange}
+              />
+            }
+            label="Cycle the solenoid while heating"
+          />
           <br />
           <TextField
             id="enteredPassPhrase"
@@ -164,7 +189,7 @@ class InitiateFractionalStillRunCard extends Component {
             helperText="Please enter the passcode to start the fractional still"
             margin="normal"
             type="password"
-            onChange={this.onChange}
+            onChange={this.onStringChange}
           />
           <br />
           {crypto.checkPassword(this.state.enteredPassPhrase, this.state.currentPassPhrase) ? (
