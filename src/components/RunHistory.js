@@ -40,7 +40,7 @@ export default class RunHistory extends Component {
           let runs = [];
           let runData = [];
           data.forEach((row) => {
-            let endtime = row.endtime ? row.endtime : ('result' in row && row.result && 'endTime' in row.result ? row.result.endTime : null)
+            let endtime = row.endtime && row.endtime !== "undefined" ? row.endtime : ('result' in row && row.result && 'endTime' in row.result ? row.result.endTime : null)
             endtime = endtime ? (endtime - row.starttime)/1000/60 : null
             runs.push({
               id: row.batchID,
