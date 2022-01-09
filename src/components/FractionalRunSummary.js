@@ -27,7 +27,6 @@ const fractionalRunSummary = (props) => {
   }
 
   const hasResult = props.runData.result && props.runData.result.heartsVolume && props.runData.result.heartsPercent;
-  console.log(props.runData)
   let endtime = props.runData.endtime && props.runData.endtime !== "undefined" ? props.runData.endtime : ('result' in props.runData && props.runData.result && 'endTime' in props.runData.result ? props.runData.result.endTime : null)
   endtime = endtime > props.runData.starttime ? endtime : null
   let length = endtime ? (endtime - props.runData.starttime)/1000/60 : null
