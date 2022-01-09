@@ -27,38 +27,52 @@ const fractionalRunSummary = (props) => {
   }
 
   const hasResult = props.runData.result && props.runData.result.heartsVolume && props.runData.result.heartsPercent;
+  let endtime = props.runData.endtime ? props.runData.endtime : ('result' in props.runData && props.runData.result && 'endTime' in props.runData.result ? props.runData.result.endTime : null)
+  endtime = endtime > props.runData.starttime ? endtime : null
+  let length = endtime ? (endtime - props.runData.starttime)/1000/60 : null
+  length = Math.floor(length/60) + ":" + (Math.round(length%60)+"").padStart(2,"0")
 
   const tempRun = props.runData.input.startAlcohol && props.runData.input.startVolume;
 
   return (
     <div>
       {tempRun ?
-      <div style={gridStyle}>
-        <Typography variant="headline" component="h3" style={headlineStyle}>Input</Typography>
-        <Typography component="span" style={cellStyle}>Start time: {(new Date(props.runData.starttime)).toLocaleString()}</Typography>
-        <Typography component="span" style={cellStyle}>End time: {props.runData.endtime ? (new Date(props.runData.endtime)).toLocaleString(): ''}</Typography>
-        <Typography component="span" style={cellStyle}>Start volume: {props.runData.input.startVolume}</Typography>
-        <Typography component="span" style={cellStyle}>Start alcohol: {props.runData.input.startAlcohol}</Typography>
-        <Typography component="span" style={cellStyle}>Percent methanol: {props.runData.input.methanolPercent}</Typography>
-        <Typography component="span" style={cellStyle}>Percent heads: {props.runData.input.volumeHeadsPercent}</Typography>
-        <Typography component="span" style={cellStyle}>Percent tails: {props.runData.input.volumeTailsPercent}</Typography>
-        <Typography component="span" style={cellStyle}>Collection coefficient: {props.runData.input.collectionCoefficient}</Typography>
-        <Typography component="span" style={cellStyle}>Last fraction for heads: {props.runData.input.lastFractionForHeads}</Typography>
-        <Typography component="span" style={cellStyle}>Last fraction for hearts: {props.runData.input.lastFractionForHearts}</Typography>
-        <Typography component="span" style={cellStyle}>Preheat temperature: {props.runData.input.preHeatEndTemperature}</Typography>
-        <Typography component="span" style={cellStyle}>Preheat time limit: {props.runData.input.preHeatTime}</Typography>
-      </div>
+      <div>
+        <div style={gridStyle}>
+          <Typography variant="headline" component="h3" style={headlineStyle}>Input</Typography>
+          <Typography component="span" style={cellStyle}>Start time: {(new Date(props.runData.starttime)).toLocaleString()}</Typography>
+          <Typography component="span" style={cellStyle}>End time: {endtime ? (new Date(endtime)).toLocaleString(): ''}</Typography>
+          <Typography component="span" style={cellStyle}>Length (Hours:Minutes): {length}</Typography>
+        </div>
+        <div style={gridStyle}>
+          <Typography component="span" style={cellStyle}>Start volume: {props.runData.input.startVolume}</Typography>
+          <Typography component="span" style={cellStyle}>Start alcohol: {props.runData.input.startAlcohol}</Typography>
+          <Typography component="span" style={cellStyle}>Percent methanol: {props.runData.input.methanolPercent}</Typography>
+          <Typography component="span" style={cellStyle}>Percent heads: {props.runData.input.volumeHeadsPercent}</Typography>
+          <Typography component="span" style={cellStyle}>Percent tails: {props.runData.input.volumeTailsPercent}</Typography>
+          <Typography component="span" style={cellStyle}>Collection coefficient: {props.runData.input.collectionCoefficient}</Typography>
+          <Typography component="span" style={cellStyle}>Last fraction for heads: {props.runData.input.lastFractionForHeads}</Typography>
+          <Typography component="span" style={cellStyle}>Last fraction for hearts: {props.runData.input.lastFractionForHearts}</Typography>
+          <Typography component="span" style={cellStyle}>Preheat temperature: {props.runData.input.preHeatEndTemperature}</Typography>
+          <Typography component="span" style={cellStyle}>Preheat time limit: {props.runData.input.preHeatTime}</Typography>
+        </div>
+        </div>
       :
-      <div style={gridStyle}>
-        <Typography variant="headline" component="h3" style={headlineStyle}>Input</Typography>
-        <Typography component="span" style={cellStyle}>Start time: {(new Date(props.runData.starttime)).toLocaleString()}</Typography>
-        <Typography component="span" style={cellStyle}>End time: {props.runData.endtime ? (new Date(props.runData.endtime)).toLocaleString(): ''}</Typography>
-        <Typography component="span" style={cellStyle}>Heads temperature: {props.runData.input.headsTemp}</Typography>
-        <Typography component="span" style={cellStyle}>Heads time: {props.runData.input.headsTime}</Typography>
-        <Typography component="span" style={cellStyle}>Hearts temperature: {props.runData.input.heartsTemp}</Typography>
-        <Typography component="span" style={cellStyle}>Hearts time: {props.runData.input.heartsTime}</Typography>
-        <Typography component="span" style={cellStyle}>Preheat temperature: {props.runData.input.preHeatEndTemperature}</Typography>
-        <Typography component="span" style={cellStyle}>Preheat time limit: {props.runData.input.preHeatTime}</Typography>
+      <div>
+        <div style={gridStyle}>
+          <Typography variant="headline" component="h3" style={headlineStyle}>Input</Typography>
+          <Typography component="span" style={cellStyle}>Start time: {(new Date(props.runData.starttime)).toLocaleString()}</Typography>
+          <Typography component="span" style={cellStyle}>End time: {(new Date(endtime)).toLocaleString()}</Typography>
+          <Typography component="span" style={cellStyle}>Length (Hours:Minutes): {length}</Typography>
+        </div>
+        <div style={gridStyle}>
+          <Typography component="span" style={cellStyle}>Heads temperature: {props.runData.input.headsTemp}</Typography>
+          <Typography component="span" style={cellStyle}>Heads time: {props.runData.input.headsTime}</Typography>
+          <Typography component="span" style={cellStyle}>Hearts temperature: {props.runData.input.heartsTemp}</Typography>
+          <Typography component="span" style={cellStyle}>Hearts time: {props.runData.input.heartsTime}</Typography>
+          <Typography component="span" style={cellStyle}>Preheat temperature: {props.runData.input.preHeatEndTemperature}</Typography>
+          <Typography component="span" style={cellStyle}>Preheat time limit: {props.runData.input.preHeatTime}</Typography>
+        </div>
       </div>
       }
       {hasResult ?

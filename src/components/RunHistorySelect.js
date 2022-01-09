@@ -26,14 +26,14 @@ export default class RunHistorySelect extends Component {
     let runList = this.props.choices.length > 0
     	&& this.props.choices.map((item, i) => {
       return (
-        <option key={i} value={item.id}>{item.name}</option>
+        <option key={i} value={item.id}>{item.name} - {Math.floor(item.length/60)}:{(Math.round(item.length%60)+"").padStart(2,"0")}</option>
       )
     }, this);
 
     return (
       <div>
         <select defaultValue="" onChange={this.handleChange}>
-          <option disabled="disabled" value="">-</option>
+          <option disabled="disabled" value="">start date, start time - still type - time length (hours:minutes)</option>
           {runList}
         </select>
       </div>

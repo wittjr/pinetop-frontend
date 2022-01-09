@@ -36,14 +36,16 @@ export default class RunHistory extends Component {
   getRuns () {
     axios.get('http://' + process.env.REACT_APP_PHIDGET_SERVER + '/rundata')
         .then(res => {
-          // console.log(res);
           let data = res.data.data;
           let runs = [];
           let runData = [];
           data.forEach((row) => {
+            let endtime = row.endtime ? row.endtime : ('result' in row && row.result && 'endTime' in row.result ? row.result.endTime : null)
+            endtime = endtime ? (endtime - row.starttime)/1000/60 : null
             runs.push({
               id: row.batchID,
-              name: (new Date(row.starttime)).toLocaleString() + ' - ' + row.operation
+              name: (new Date(row.starttime)).toLocaleString() + ' - ' + row.operation,
+              length: endtime
             });
             runData[row.batchID] = Object.assign({}, row);
           });
